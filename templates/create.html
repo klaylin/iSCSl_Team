@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create</title>
+<link
+	href="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/css/bootstrap.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script
+	src="https://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+
+				<div class="page-header">
+					<h1>
+						操作区 <small>输入创建信息</small>
+					</h1>
+				</div>
+				<div class="form-group">
+					<label for="inputEmail" class="col-sm-2 control-label">iblock_name</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="name"
+							placeholder="请输入" style="width: 200px;" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword" class="col-sm-2 control-label">size</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="password"
+							placeholder="请输入" style="width: 200px;" value="">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default" data-toggle="modal"
+							name="create" id="create" data-target="#myModal">Create</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 模态框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">RESULT</h4>
+					</div>
+					<div class="modal-body">
+						<input type="text" id="double" name="double" value="">
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="newcreate" class="btn btn-default"
+							data-dismiss="modal">再次创建</button>
+						<input type="button" class="btn btn-default" value="查看表格" id="see">
+					</div>
+
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+
+	</div>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script type="text/javascript">
+	$("#create").click(function () {
+     var name = $("#name").val()
+     var password = $("#password").val()
+     $.ajax({
+         url:"http://0.0.0.0:7777/send_message",
+         type:"GET",
+         data:{
+             name:name,
+             password:password
+         },
+         success:function (data) {
+        // alert(data);
+         $("#double").val(data);
+          //赋值
+          
+         },
+         error:function () {
+         }
+     })
+ });
+	</script>
+	<script type="text/javascript">
+$("#newcreate").click(function(){
+ 	$("input[type=text]").val('');
+});
+</script>
+
+	<script type="text/javascript">
+$("#see").click(function(){
+window.parent.location.href="http://0.0.0.0:7777/";  
+});
+</script>
+
+
+</body>
+</html>
